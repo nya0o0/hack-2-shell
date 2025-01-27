@@ -42,13 +42,44 @@ Output 2:
 ## Quesion 2: clean the data
 Use `grep`, `uniq`, and `sed` for this question. Check that all of the species names are spelled correctly in the file `iris-data-dirty.csv`. Also check for missing values stored as NA. Create a new file where mispelled names are replaced with the correct values, and lines with NA are excluded, and save it as `iris-data-clean.csv`. Use `cut`, `sort` and `uniq` to list the number of data values there are for each species in the new cleaned data file. Describe your work.
 
-First, I used `man` to see the manual of of the `grep`, `uniq`, and `sed` commands.
+First, I used `man` to see the manual of of the `grep`, `uniq`, and `sed` commands. The `grep` command can print the lines with matched, the `uniq` command can omit repeated lines and `sed` can edit text in a input stream. Therefore, I tried to use `grep` to get the fifth colum of the data, and then use `uniq` to omit the repeated lines. However, I found that the output has repeated `Iris-setosa` lines. After that, I looked for command to solve this and found I can use `sort` before using `uniq`. 
+
+Second, to edit the mispelled names and delete the lines with `NA`, I used `sed` and `grep -v` and write the cleaned data to a new file ` iris-data-clean.csv`.
+
+Third, I read the man page of the `cut` command. It can remove sections from each line of files, so it can be used to get the last column of the cleaned file. According to the mannual, in the `cut` command, `-d` option can change the field delimiter, and `-f` can select the given field, so they are used to get the fifth column of the data. Then, similar to step 1, I used `sort` and `uniq` to delete the repeated lines, but add a `-c` option to count the number of data values there are for each species.
+
+Solution:
+```
+grep -o "[^,]*$" iris-data-dirty.csv | uniq
+```
+Output 1:
+```
+Iris-setosa
+Iris-setsa
+Iris-versicolor
+Iris-versicolour
+Iris-virginica
+```
+
+```
+sed 's/Iris-setsa/Iris-setosa/; s/Iris-versicolour/Iris-versicolor/' iris-data-dirty.csv | grep -v "NA" > iris-data-clean.csv
+
+cut -d ',' -f 5 iris-data-clean.csv | sort | uniq -c
+```
+Output 2:
+```
+      1
+     50 Iris-setosa
+     48 Iris-versicolor
+     50 Iris-virginica
+```
+
 
 
 ## Quesion 3: find a sequence
 Find how many lines in the data file ·test.fastq.gz` start with "TGCAG" and end with "GAG". Describe your work.
 
-First, I searched for what command can be used to search in a compressed file. Then, I found that `zgrep` can do this and found the mannual of it. The manual toled me to use the mannual of `grep` for more detialed operations. In the `grep` mannual, I found that `-c` option is required for counting the number of matched lines, and the  caret ` ^ ` and  the  dollar sign `$` are meta-characters that respectively match the empty string at the beginning and end of a line. Therefore, using this information, I found the answer is 44.
+First, I searched for what command can be used to search in a compressed file. Then, I found that `zgrep` can do this and found the mannual of it. The manual toled me to use the mannual of `grep` for more detialed operations. In the `grep` mannual, I found that `-c` option is required for counting the number of matched lines, and the  caret ` ^ ` and  the  dollar sign `$` are meta-characters that respectively match the empty string at the beginning and end of a line. Also, `.` matches any single character (except a newline), and `*` matches zero or more occurrences of the preceding element. Together, `.*` means "match zero or more of any character". Therefore, using this information, I found the answer is 44.
 
 Solution:
 
@@ -59,3 +90,6 @@ Output
 ```
 44
 ```
+
+## Quesion 3: Find a sequence chunk
+Using `grep` and other tools if necessary find all lines that contain the sequence "AAAACCCC" and for each print that line, the line above it, and two lines below it (so that a 4-line chunk around each search hit is printed). Describe your work.
