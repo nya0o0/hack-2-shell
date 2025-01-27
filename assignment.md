@@ -1,7 +1,7 @@
 ## Quesion 1: get the data file
 Download the following data files from the internet using the `curl` command: http://eaton-lab.org/pdsb/test.fastq.gz and http://eaton-lab.org/pdsb/iris-data-dirty.csv. Use the `less` or `zless` commands to look at each file. Describe what these commands do. Finally, use the `head` command to print the first 5 lines of the file `iris-data-dirty.csv`.
 
-First, I ued man curl to find the using method of the `curl` command. I found that a `-O` option is needed to save the file with the same name as in the URL. Therefore, I used `curl` command with the `-O` option to download the two files. Then, I use `ls` command to confirm that the file has been saved.
+First, I used `man curl` to find the using method of the `curl` command. I found that a `-O` option is needed to save the file with the same name as in the URL. Therefore, I used `curl` command with the `-O` option to download the two files. Then, I use `ls` command to confirm that the file has been saved.
 
 Second, I read the man page of the `zless` and `less` commands. The `less` command is used to view the contents of a file. It does not have to read the entire input file before  starting, so I may start faster than text editors when handling large files. Compared to the `less` command, the `zless` command can be used to view compressed or plain text files. Therefore, I decided to use `less` to view the `iris-data-dirty.csv` file and use `zless` to view the `test.fastq.gz file`.
 
@@ -38,3 +38,8 @@ Output 2:
 <center><h1>301 Moved Permanently</h1></center>
 <hr><center>nginx</center>
 ```
+
+## Quesion 2: clean the data
+Use `grep`, `uniq`, and `sed` for this question. Check that all of the species names are spelled correctly in the file `iris-data-dirty.csv`. Also check for missing values stored as NA. Create a new file where mispelled names are replaced with the correct values, and lines with NA are excluded, and save it as `iris-data-clean.csv`. Use `cut`, `sort` and `uniq` to list the number of data values there are for each species in the new cleaned data file. Describe your work.
+
+First, I used `man` to see the manual of of the `grep`, `uniq`, and `sed` commands.
