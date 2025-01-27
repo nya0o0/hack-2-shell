@@ -3,7 +3,7 @@ Download the following data files from the internet using the `curl` command: ht
 
 First, I used `man curl` to find the using method of the `curl` command. I found that a `-O` option is needed to save the file with the same name as in the URL. Therefore, I used `curl` command with the `-O` option to download the two files. Then, I use `ls` command to confirm that the file has been saved.
 
-Second, I read the man page of the `zless` and `less` commands. The `less` command is used to view the contents of a file. It does not have to read the entire input file before  starting, so I may start faster than text editors when handling large files. Compared to the `less` command, the `zless` command can be used to view compressed or plain text files. Therefore, I decided to use `less` to view the `iris-data-dirty.csv` file and use `zless` to view the `test.fastq.gz file`.
+Second, I read the man page of the `zless` and `less` commands. The `less` command is used to view the contents of a file. It does not have to read the entire input file before starting, so I may start faster than text editors when handling large files. Compared to the `less` command, the `zless` command can be used to view compressed or plain text files. Therefore, I decided to use `less` to view the `iris-data-dirty.csv` file and use `zless` to view the `test.fastq.gz file`. However, when I viewed the file content, It showed a error message `301 Moved Permanently`. I read the mannule of `curl` command again and a -L option needed for the sitution that the server reports that the requested page has moved to a different location. Therefore, I re-downloaded the files with `curl -L -O` command and view them again, this time the files looked correct.
 
 Third, I read the man page of the `head` command. I found that I need to use the `-n 5` description to set it to read the first 5 lines of the file.
 
@@ -32,14 +32,20 @@ head -n 5 iris-data-dirty.csv
 ```
 Output 2:
 ```
-<html>
-<head><title>301 Moved Permanently</title></head>
-<body>
-<center><h1>301 Moved Permanently</h1></center>
-<hr><center>nginx</center>
+5.1,3.5,1.4,0.2,Iris-setosa
+4.9,3.0,1.4,0.2,Iris-setosa
+4.7,3.2,1.3,0.2,Iris-setosa
+4.6,3.1,1.5,0.2,Iris-setosa
+5.0,3.6,1.4,0.2,Iris-setosa
 ```
 
 ## Quesion 2: clean the data
 Use `grep`, `uniq`, and `sed` for this question. Check that all of the species names are spelled correctly in the file `iris-data-dirty.csv`. Also check for missing values stored as NA. Create a new file where mispelled names are replaced with the correct values, and lines with NA are excluded, and save it as `iris-data-clean.csv`. Use `cut`, `sort` and `uniq` to list the number of data values there are for each species in the new cleaned data file. Describe your work.
 
 First, I used `man` to see the manual of of the `grep`, `uniq`, and `sed` commands.
+
+
+## Quesion 3: find a sequence
+Find how many lines in the data file ·test.fastq.gz` start with "TGCAG" and end with "GAG". Describe your work.
+
+First, I searched for what command can be used to search in a compressed file. Then, I found that `zgrep` can do this and read the mannual of it.
