@@ -16,9 +16,12 @@ curl -O http://eaton-lab.org/pdsb/iris-data-dirty.csv
 # Test whether the files are downloaded successfully
 ls
 ```
+Output 1:
 ```
 abc.txt  file.txt  iris-data-dirty.csv  test.fastq.gz
 ```
+
+
 ```
 # View the contents of the files
 less iris-data-dirty.csv
@@ -27,6 +30,7 @@ zless test.fastq.gz
 # Print the first 5 lines of iris-data-dirty.csv
 head -n 5 iris-data-dirty.csv
 ```
+Output 2:
 ```
 <html>
 <head><title>301 Moved Permanently</title></head>
