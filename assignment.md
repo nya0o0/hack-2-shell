@@ -93,3 +93,22 @@ Output
 
 ## Quesion 3: Find a sequence chunk
 Using `grep` and other tools if necessary find all lines that contain the sequence "AAAACCCC" and for each print that line, the line above it, and two lines below it (so that a 4-line chunk around each search hit is printed). Describe your work.
+
+In the mannual of `grep`, `-A` is used to print given number of lines after the matching lines, and `-B` is used to print given number of lines before the matching lines. Also, `zgrep` is needed for compressed file. Therefore, I used `zgrep -A -B` to do this.
+
+Solution:
+```
+zgrep -B 1 -A 2 "AAAACCCC" test.fastq.gz
+```
+Output:
+```
+@32082_przewalskii.98 GRC13_0027_FC:4:1:5669:1669 length=74
+TGCAGAATAGATAGGAAACGTTTTGGCGCTGTAGACATTAAAACCCCAGTAGGACACGGGTATCACAACGTACA
++32082_przewalskii.98 GRC13_0027_FC:4:1:5669:1669 length=74
+IIIIIIIIIIIIIIIIIIHIHIIIIIIIIGIIIGIIIIIIHIIIIIIIHIIIIHIIIIIIEHIHHIIIIICIHI
+--
+@33413_thamno.59 GRC13_0027_FC:4:1:5000:1620 length=74
+TGCAGTGGATCGAAAACCCCGAGGCTCAAGGTCACGCCACCGTCTTCGTGGCCAAGTTCTTCGGCCGCGCCGGC
++33413_thamno.59 GRC13_0027_FC:4:1:5000:1620 length=74
+IIIIIIIIIIIIIIIIIIIIDHIIHHIIIIIEIBGBGGGIIHEHHHIEBBHHIEGGDGIGGHAEFDBFBDDB?D
+```
