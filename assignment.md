@@ -5,7 +5,7 @@ First, I used `man curl` to find the using method of the `curl` command. I found
 
 Second, I read the man page of the `zless` and `less` commands. The `less` command is used to view the contents of a file. It does not have to read the entire input file before starting, so I may start faster than text editors when handling large files. Compared to the `less` command, the `zless` command can be used to view compressed or plain text files. Therefore, I decided to use `less` to view the `iris-data-dirty.csv` file and use `zless` to view the `test.fastq.gz file`. However, when I viewed the file content, It showed a error message `301 Moved Permanently`. I read the mannule of `curl` command again and a -L option needed for the sitution that the server reports that the requested page has moved to a different location. Therefore, I re-downloaded the files with `curl -L -O` command and view them again, this time the files looked correct.
 
-Third, I read the man page of the `head` command. I found that I need to use the `-n 5` description to set it to read the first 5 lines of the file.
+Third, I read the man page of the `head` command. I found that I need to use the `-n 5` description to set it to read the first 5 lines of the file. 
 
 Solution:
 ```
@@ -48,4 +48,14 @@ First, I used `man` to see the manual of of the `grep`, `uniq`, and `sed` comman
 ## Quesion 3: find a sequence
 Find how many lines in the data file ·test.fastq.gz` start with "TGCAG" and end with "GAG". Describe your work.
 
-First, I searched for what command can be used to search in a compressed file. Then, I found that `zgrep` can do this and read the mannual of it.
+First, I searched for what command can be used to search in a compressed file. Then, I found that `zgrep` can do this and found the mannual of it. The manual toled me to use the mannual of `grep` for more detialed operations. In the `grep` mannual, I found that `-c` option is required for counting the number of matched lines, and the  caret ` ^ ` and  the  dollar sign `$` are meta-characters that respectively match the empty string at the beginning and end of a line. Therefore, using this information, I found the answer is 44.
+
+Solution:
+
+```
+zgrep -c "^TGCAG.*GAG$" test.fastq.gz
+```
+Output
+```
+44
+```
