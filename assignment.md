@@ -46,7 +46,7 @@ First, I used `man` to see the manual of of the `grep`, `uniq`, and `sed` comman
 
 Second, to edit the mispelled names and delete the lines with `NA`, I used `sed` and `grep -v` and write the cleaned data to a new file ` iris-data-clean.csv`.
 
-Third, I read the man page of the `cut` command. It can remove sections from each line of files, so it can be used to get the last column of the cleaned file. According to the mannual, in the `cut` command, `-d` option can change the field delimiter, and `-f` can select the given field, so they are used to get the fifth column of the data. Then, similar to step 1, I used `sort` and `uniq` to delete the repeated lines, but add a `-c` option to count the number of data values there are for each species.
+Third, I read the man page of the `cut` command. It can remove sections from each line of files, so it can be used to get the last column of the cleaned file. According to the mannual, in the `cut` command, `-d` option can change the field delimiter, and `-f` can select the given field, so they are used to get the fifth column of the data. Then, similar to step 1, I used `sort` and `uniq` to delete the repeated lines, but add a `-c` option to count the number of data values there are for each species. However, I found that there is a line that count 1 for an empty species name in the output, therefore, I used `grep -v` again to delete the empty line.
 
 Solution:
 ```
@@ -62,13 +62,12 @@ Iris-virginica
 ```
 
 ```
-sed 's/Iris-setsa/Iris-setosa/; s/Iris-versicolour/Iris-versicolor/' iris-data-dirty.csv | grep -v "NA" > iris-data-clean.csv
+sed 's/Iris-setsa/Iris-setosa/; s/Iris-versicolour/Iris-versicolor/' iris-data-dirty.csv | grep -v "NA" | grep -v '^$' > iris-data-clean.csv
 
 cut -d ',' -f 5 iris-data-clean.csv | sort | uniq -c
 ```
 Output 2:
 ```
-      1
      50 Iris-setosa
      48 Iris-versicolor
      50 Iris-virginica
