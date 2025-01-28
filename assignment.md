@@ -50,7 +50,7 @@ Third, I read the man page of the `cut` command. It can remove sections from eac
 
 Solution:
 ```
-grep -o "[^,]*$" iris-data-dirty.csv | uniq
+grep -o "[^,]*$" iris-data-dirty.csv | sort | uniq
 ```
 Output 1:
 ```
