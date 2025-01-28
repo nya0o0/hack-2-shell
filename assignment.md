@@ -62,7 +62,7 @@ Iris-virginica
 ```
 
 ```
-sed 's/Iris-setsa/Iris-setosa/; s/Iris-versicolour/Iris-versicolor/' iris-data-dirty.csv | grep -v "NA" | grep -v '^$' > iris-data-clean.csv
+sed 's/Iris-setsa/Iris-setosa/g; s/Iris-versicolour/Iris-versicolor/g' iris-data-dirty.csv | grep -v "NA" | grep -v '^$' > iris-data-clean.csv
 
 cut -d ',' -f 5 iris-data-clean.csv | sort | uniq -c
 ```
